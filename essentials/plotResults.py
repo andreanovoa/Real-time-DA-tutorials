@@ -1220,7 +1220,7 @@ def plot_timeseries(filter_ens, truth, plot_states=True, plot_bias=False, plot_e
         for axi, qi in enumerate(dims):
             y_lims = [min_y[axi] - margin[axi], max_y[axi] + margin[axi]]
             
-            if Nq == 1:
+            if Nq == 1 or len(dims)==1:
                 q_axes = [ax_zoom[0], ax_zoom[1], ax_all]
             else:
                 q_axes = [ax_zoom[axi, 0], ax_zoom[axi, 1], ax_all[axi]]
@@ -1250,14 +1250,14 @@ def plot_timeseries(filter_ens, truth, plot_states=True, plot_bias=False, plot_e
             ylbl = '$y_{}$'.format(qi)
             if reference_y != 1.:
                 ylbl += ' norm.'
-            if Nq == 1:
+            if Nq == 1  or len(dims)==1:
                 ax_zoom[0].set(ylabel=ylbl)
                 ax_all.set(ylabel=ylbl)
             else:
                 ax_zoom[qi, 0].set(ylabel=ylbl)
                 ax_all[qi].set(ylabel=ylbl)
 
-        if Nq == 1:
+        if Nq == 1  or len(dims)==1:
             ax_all.legend(loc='lower left', bbox_to_anchor=(0.1, 1.1), ncol=5, fontsize='small')
             for ax in [ax_zoom[0], ax_zoom[1], ax_all]:
                 ax.set(xlabel=t_label)
